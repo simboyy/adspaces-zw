@@ -36,7 +36,7 @@
         <div class="row">
         
               <div class="col-sm-4" style="border-right: bold">
-                <h3 >Total Spent:<br> &nbsp;<br>{{order.orders.total | currency}}</h3>
+                <h3 >Total Spent:<br> &nbsp;<br>{{order.orders.total | currency:"R"}}</h3>
               </div>
               <div class="col-sm-4"><h3>How you pay</h3><br><small>manage</small></div>
               <div class="col-sm-4"><h3><a href="/address">Advertising Profile</a></h3><br><p>Company:{{order.Auth.getCurrentUser().company}}<br>Contact Name:{{order.Auth.getCurrentUser().name}}<b/><br>Phone :{{order.Auth.getCurrentUser().phone}}<br>Email: {{order.Auth.getCurrentUser().email}}</div>

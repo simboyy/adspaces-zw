@@ -35,14 +35,14 @@
 			    <td>{{checkout.Cart.cart.getTotalPrice() | currency : checkout.Settings.currency.symbol}}</td>
 			</tr>
             <tr class="md-table-content-row">
-				<td>Handling Fee: </td>
+				<td>Discount : </td>
 			    <td >
                     {{checkout.Cart.cart.getHandlingFee()| currency : checkout.Settings.currency.symbol}}
                 </td>
 			</tr>
             <tr class="md-table-content-row">
 				<td>Total Amount:&nbsp;&nbsp;&nbsp;</td>
-			    <td>{{checkout.Cart.cart.getTotalPrice() + checkout.Cart.cart.getHandlingFee() - checkout.coupon.amount | currency : checkout.Settings.currency.symbol}}</td>
+			    <td>{{checkout.Cart.cart.getTotalPrice() - checkout.Cart.cart.getHandlingFee() - checkout.coupon.amount | currency : checkout.Settings.currency.symbol}}</td>
 			</tr>
             <tr>
                 <td>&nbsp;</td>
@@ -55,7 +55,7 @@
                        <div class="row">
                             <div class="col-md-6 short">
                                 <div class="payment-logo">
-                                  <img width="200px"  height="60px" data-ng-src="./assets/images/paypal.png" alt="">
+                                  <img width="260px"  height="120px" data-ng-src="./assets/images/paypal.png" alt="">
                                 </div>
                                 <label class="payment-label" for="r1">
                                                           
@@ -70,14 +70,14 @@
                             </div>
                         <div class="col-md-6 short">
                             <div class="payment-logo">
-                              <img width="200px"  height="60px" data-ng-src="./assets/images/paynow.png" alt="">
+                              <img width="260px"  height="120px" data-ng-src="./assets/images/payfast.png" alt="">
                             </div>
                               <label class="payment-label" for="r1">
                                                           
                                   <div class="payment-selector" id="isNotMasterCard">
                                       <input type="radio" name="payment_method_id"   ng-model="checkout.options.paymentMethod.name" value="PayNow" id="r1"> 
                                   </div>
-                                  <span class="payment-type-name">PayNow</span>
+                                  <span class="payment-type-name">PayFast</span>
                                                   
                                                           
                              </label>

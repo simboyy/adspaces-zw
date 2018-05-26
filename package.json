@@ -4,6 +4,7 @@
   "main": "server/app.js",
   "dependencies": {
     "angular-bootstrap-calendar": "^0.30.0",
+    "angular-chart.js": "^1.1.1",
     "async": "^2.0.1",
     "aws-sdk": "^2.224.1",
     "babel-polyfill": "^6.7.2",

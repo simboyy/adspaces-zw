@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div id="totalContainer" class="col-xs-3 stats-graph">
-                        <h4 class="section-header">Total Spend</h4> {{vm.cart.getTotalPrice() | currency}} - ({{vm.cart.getTotalCount()}} items)
+                        <h4 class="section-header">Total Spend</h4> {{vm.cart.getTotalPrice() | currency:"R"}} - ({{vm.cart.getTotalCount()}} items)
                     </div>
                 </div>
             </div>
@@ -34,8 +34,7 @@
         <div>
             <p>
                 <div>
-                    <div class="actions-continue">
-                        <input type="text" placeholder="Filter ..." class="form-control col-md-4" style="width:250px;margin-left:20px;" ng-model="filterCart" autofocus/>
+                    <div class="actions-continue">                       
                         <button value="Proceed to Checkout →" name="proceed" class="btn btn-danger pull-right" ng-click="cart.createCampaign(vm.cart);" ng-disabled="vm.cart.getTotalCount() <= 0">Create Campaign/Advert →</button>
                         <div class="clearfix"></div>
                     </div>
@@ -49,7 +48,7 @@
                                 <th style="width: 250px">Start and End Date</th>
                                 <th style="width: 100px">Available</th>
                                 <th>Price</th>
-                                <th>Inserts</th>
+                                <th>Insert(s)</th>
                                 <th>Total</th>
                                 <th>Remove</th>
                             </tr>
@@ -58,7 +57,7 @@
                             <!-- empty cart message -->
                             <tr ng-hide="vm.cart.getTotalCount() > 0">
                                 <td class="tdCenter" colspan="7">
-                                    Your MediaCart is empty. &nbsp;&nbsp;<a class="btn btn-primary" href="/" ng-click="vm.cancel();">Build Campaign</a>
+                                    Your Adspace Cart is empty. &nbsp;&nbsp;<a class="btn btn-primary" href="/" ng-click="vm.cancel();">Build Campaign</a>
                                 </td>
                             </tr>
                             <tr ng-repeat="item in vm.cart.items track by $index ">
@@ -99,7 +98,7 @@
                                     &nbsp;&nbsp;&nbsp;<span ng-show="cart.loaded[$index]=='notavailable'" class="green">10</span>
                                     <span ng-show="cart.loaded[$index]=='available'" class="green">{{cart.available[$index]}}</span>
                                 </td>
-                                <td>{{item.price | currency}}</td>
+                                <td>{{item.price | currency:"R"}}</td>
                                 <td>
                                     <md-button class="md-raised md-primary small-button md-icon-button" ng-click="vm.cart.addItem({sku:item.sku, name:item.name, slug:item.slug, mrp:item.mrp, price:item.price, weight:item.weight, vid:item.vid}, +1)" aria-label="Add to cart">
                                         <ng-md-icon icon="add"></ng-md-icon>
@@ -109,7 +108,7 @@
                                         <ng-md-icon icon="remove"></ng-md-icon>
                                     </md-button>
                                 </td>
-                                <td><span><strong>{{item.price * item.quantity | currency}}</strong></span></td>
+                                <td><span><strong>{{item.price * item.quantity | currency:"R"}}</strong></span></td>
                                 <td class="product-actions">
                                     <a aria-label="Remove {{item.name}} from cart" ng-click="vm.cart.addItem({sku:item.sku, vid: item.vid}, -10000000);">
                                         <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>

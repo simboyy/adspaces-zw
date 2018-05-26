@@ -10,11 +10,36 @@ _________________________________________________________ -->
                 <img width="140px" height="50px" src="/assets/img/logo.png"  class="visible-xs"><span class="sr-only"></span>
             </a>
         </div>
-         <div class="col-md-9 offer" style="padding-top:  10px" data-animate="fadeInDown">
-            <div class="col-md-6"></div>
-            <div class="col-md-6"> <!--<img src="/assets/img/payments-banner-bottom.png">--></div>
+         <div class="col-md-9" style="padding-left:70px">
+            <div class="col-md-6">
+			 <form>
+                <div class="form-group">
+                      <div id="advanced"
+                         data-input-name="country2"
+						 data-countries='{"ZW": "Zimbabwe","ZM": "Zambia","ZA":"South Africa"}'
+						 data-selected-country="ZA"
+						 data-button-size="btn-md"
+						 data-button-type="btn-default"
+						 data-scrollable-height="250px"                   
+                         >
+                    </div>
+                </div>
+            </form>
+		    </div>
+            <div class="col-md-6"> 
+				<div class="navbar-buttons pull-right">
+             <md-button ng-click="vm.openCart()" class="md-raised cart" ng-if="!search.show">
+                    <ng-md-icon icon="shopping_cart"></ng-md-icon>
+                    <span  show-gt-sm>Cart {{vm.cart.getTotalCount()}} Items  </span>
+                    <span hide show-gt-sm odometer="vm.cart.getTotalPrice()">
+                  </md-button>
+            <!--/.nav-collapse -->
+
            
-             </a>
+        </div>		
+			</div>
+           
+             
         </div>
         <div class="col-md-2 pull-right" data-animate="fadeInDown">
            <top-menu ng-if="!search.show"></top-menu> 
@@ -27,7 +52,7 @@ _________________________________________________________ -->
 <!-- *** NAVBAR ***
 _________________________________________________________ -->
 
-<div class="navbar navbar-default yamm" role="navigation" id="navbar">
+<div class="navbar navbar-default yamm" role="navigation" id="navbar" ng-if="$stateParams.slug">
     <div class="container">
   <div class="col-md-12">
         <div class="navbar-header">
@@ -78,11 +103,11 @@ _________________________________________________________ -->
         <!--/.nav-collapse -->
 
         <div class="navbar-buttons pull-right">
-             <md-button ng-click="vm.openCart()" class="md-raised cart" ng-if="!search.show">
+            <!--  <md-button ng-click="vm.openCart()" class="md-raised cart" ng-if="!search.show">
                     <ng-md-icon icon="shopping_cart"></ng-md-icon>
                     <span  show-gt-sm>Cart {{vm.cart.getTotalCount()}} Items  </span>
                     <span hide show-gt-sm odometer="vm.cart.getTotalPrice()">
-                  </md-button>
+                  </md-button> -->
             <!--/.nav-collapse -->
 
             <div class="navbar-collapse collapse right" id="search-not-mobile">
@@ -132,3 +157,43 @@ _________________________________________________________ -->
 </div>
 <!-- *** NAVBAR END *** -->
 </div>
+ <script>
+ 
+   $('#options').flagStrap({
+    countries: {
+        "AU": "Australia",
+        "GB": "United Kingdom",
+        "US": "United States"
+    },
+	buttonSize: "btn-sm",
+    buttonType: "btn-info",
+    labelMargin: "10px",
+    scrollable: false,
+    scrollableHeight: "350px"
+});
+  
+    $('#advanced').flagStrap({
+	
+	 onSelect: function (value, element) {
+        //alert(value);
+		if(value == 'ZW'){
+		 window.location.href="http://www.adspaces.co.zw";
+		}
+		if(value == 'ZA'){
+		  window.location.href="http://www.adspaces.co.za";
+		}
+		if(value == 'ZM'){
+		  window.location.href="http://www.adspaces.co.zm";
+		}
+        console.log(element);
+    }
+	 
+	});
+	
+	   $("span[class*='flagstrap']").replaceWith(function(n){
+            return "<span class='flagstrap-selected-wGXyO2cQ'><i class='flagstrap-icon flagstrap-za' style='margin-right: 10px;'></i>South Africa</span>";
+        });
+	
+	
+
+</script>

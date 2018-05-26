@@ -136,12 +136,7 @@ function create(req, res) {
           console.log('Deleted dog.jpg!!');
       });
       
-    });
-  
-  
-  
-  
-  
+    }); 
   
   
   return _media2.default.create(req.files.file).then(respondWithResult(res, 201)).catch(handleError(res));

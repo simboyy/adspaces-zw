@@ -22,6 +22,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="app/vendor-e8cd92c731.css">
     <link rel="stylesheet" href="app/app-2d3543d332.css">
+	<link href="app/flags.css" rel="stylesheet">
 	
 	<style>
  body {background:#e2e2e2;}
@@ -236,41 +237,26 @@ background-color: #dd0000     ;
     <script src="app/vendor-7f00e34dae.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="app/app.js"></script>
+	<script src="app/jquery.flagstrap.js"></script>
     <script src="https://kendo.cdn.telerik.com/2016.3.1118/js/jszip.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2016.3.1118/js/kendo.all.min.js"></script>
+    <script type="text/javascript" src="app/kendo.culture.de-DE.js"></script>
 
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>    
     <script type="text/javascript" src="https://kendo.cdn.telerik.com/2016.3.1118/js/pako_deflate.min.js"></script>
    
-      <a id="popuplink" href="#inline" style="display:none;"></a>
-      <div id="inline" style="display:none;text-align:center;">
-      <img src="https://thebeachfurniture.co.nz/newbeach-logo.png" alt="" id="logo">
-      <h3 style="margin-top:20px;">The Beach Furniture has changed its name to Urban & Beach Furniture</h3>
-      <p>But we will continue providing the same beautifully crafted character furniture</p>
-      <p><a href="javascript:;" onclick="jQuery.fancybox.close();" style="background-color:#333;padding:5px 10px;color:#fff;border-radius:5px;text-decoration:none;">Close</a></p>
-      </div>
       
       <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.js"></script>
-     <script type="text/javascript">
-       jQuery(document).ready(function () {
-          function openFancybox() {
-              setTimeout(function () {
-                  jQuery('#popuplink').trigger('click');
-              }, 500);
-          };
-            var visited = jQuery.cookie('visited');
-            if (visited == 'yes') {
-                 // second page load, cookie active
-            } else {
-                openFancybox(); // first page load, launch fancybox
-            }
-        jQuery.cookie('visited', 'yes', {
-            expires: 365 // the number of days cookie  will be effective
-        });
-        jQuery("#popuplink").fancybox({modal:true, maxWidth: 400, overlay : {closeClick : true}});
-     });
-     <script/>  
+      <script type="text/javascript">
+       kendo.culture("de-DE");
+   </script>
+	  
+	  
+    
+	 
+	 
+	
     
   </body>
 </html>

@@ -37,7 +37,7 @@
                       <div class="row">
                       
                             <div class="col-sm-4" style="border-right: bold">
-                              <h3 >Orders Total :<br> &nbsp;<br>{{orders.orders.total | currency}}</h3>
+                              <h3 >Orders Total :<br> &nbsp;<br>{{orders.orders.total | currency:"R"}}</h3>
                             </div>
                             <div class="col-sm-4"><h3>How You get paid</h3><br><small><a href="/profile">manage</a></small></div>
                              <div class="col-sm-4"><h3><a href="/profile">Advertising Profile</a></h3><br><p>Company:{{orders.Auth.getCurrentUser().company}}<br>Contact Name:{{user.name}}<b/><br>Phone :{{orders.Auth.getCurrentUser().phone}}<br>Email: {{orders.Auth.getCurrentUser().email}}</div>

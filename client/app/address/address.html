@@ -78,7 +78,7 @@
 </md-card>
 <div layout="column">
 <md-button class="md-raised" ng-click="address.addressForm(true);address.new.address=true; address.addr={country: address.Settings.country.name}">
-    <ng-md-icon icon="location_on"></ng-md-icon>Add New Address
+    <ng-md-icon icon="location_on"></ng-md-icon>Add Billing Address
 </md-button>
 <div layout="row" layout-align="start start" layout-wrap>
 
@@ -98,7 +98,7 @@ ng-class="{'selected':(a==address.addr)} "
       </md-card-header>
 	  
       <md-card-content layout="column" layout-align="start start">
-			{{a.name}}<br/>
+			      {{a.name}}<br/>
             {{a.address}}<br/>
             {{a.city}}<br/>
             {{a.state}}<br/>

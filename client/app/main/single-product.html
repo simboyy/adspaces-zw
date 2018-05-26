@@ -51,8 +51,8 @@
                                 <div class="col-sm-9">
                                     <div class="box" style="margin-right: 20px">
                                         <h3 class="text-center">Advertising in {{single.product.name}} </h3>
-                                        <div ng-if="single.product.info">                                                                                     
-                                                <p>{{single.product.info }}</p>                                        
+                                        <div ng-if="single.product.info">
+                                            <p>{{single.product.info }}</p>
                                             <div ng-if="single.product.stats.length>0">
                                                 <div class="row">
                                                     <div class="col-xs-6 col-md-2" ng-repeat="f in single.product.stats">
@@ -144,24 +144,23 @@
                                     </div>
                                     <div class="col-md-7" style="height: 500px;overflow:scroll">
                                         <p>
-                                            <table class="table table-striped" id="zaposphere-table-clarity">
+                                            <table md-colresize="md-colresize" class="md-table" id="exportable">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
-                                                        <th>Media Options </th>
-                                                        <th>Pricing</th>
-                                                        <th></th>
+                                                        <th class="md-table-header"></th>
+                                                        <th class="md-table-header">Media Options </th>
+                                                        <th class="md-table-header">Pricing</th>
+                                                        <th class="md-table-header"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
-                                                    <tr data-ng-repeat="adspace in single.product.variants"  ng-click="single.preview(adspace)">
-                                                        <td>{{$index+1}}</td>
-                                                        <td>{{adspace.name}}
-                                                            <br><span><small>{{adspace.size}} &nbsp;{{adspace.maxSize}}<br/> &nbsp;{{adspace.formart}}</small></span></td>
-                                                        <td> {{adspace.price | currency}}
+                                                    <tr data-ng-repeat="adspace in single.product.variants" ng-click="single.preview(adspace)" class="md-table-content-row" >
+                                                        <td class="md-table-header">{{$index+1}}</td>
+                                                        <td class="md-table-header">{{adspace.name}}
+                                                            <br><span>{{adspace.size}} &nbsp;{{adspace.maxSize}}<br/> &nbsp;{{adspace.formart}}</span></td>
+                                                        <td class="md-table-header">  {{adspace.price | currency:"R"}}
                                                             <br><small>{{adspace.model}}</small></td>
-                                                        <td><small> 
+                                                        <td class="md-table-header"><small> 
                                                           <div layout="row" layout-align="start center">
                                                           <cart-buttons variant="adspace" product="single.product"></cart-buttons>
                                                           
@@ -176,94 +175,743 @@
                                 </div>
                                 <hr>
                             </div>
-                            <!--div-->
-                            <div>
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <div layout="rows" layout-align="center center" ng-if="single.reviews.length==0 ">
-                                            <br/>
-                                            <md-divider></md-divider>
-                                            <br/>
-                                            <md-button ng-click="single.reviewForm()" class="md-raised md-primary">Be the first to review this publisher</md-button>
-                                        </div>
-                                        <div class="reviews" ng-if="single.reviews.length>0 ">
-                                            <!--<h3>Reviews</h3>-->
-                                            <div class="reviews-header" layout="column">
-                                                <div flex layout="row" layout-align="center center">
-                                                    <md-button ng-click="single.reviewForm()" class="md-primary md-raised">Rate & Review</md-button>
-                                                </div>
-                                            </div>
-                                            <md-card ng-repeat="review in single.reviews | orderBy: '-created'">
-                                                <md-card-header>
-                                                    <md-card-avatar>
-                                                        <list-image string="{{review.message || review.rating}}"></list-image>
-                                                    </md-card-avatar>
-                                                    <md-card-header-text>
-                                                        <span class="md-subhead" ng-if="review.rating">
-                              <div class="rating-button">{{review.rating}} <ng-md-icon icon="star" size="15"></ng-md-icon></div>
-                          </span>
-                                                        <span class="md-title" style="white-space: pre;margin-left: 10px;">{{review.message}}</span>
-                                                    </md-card-header-text>
-                                                </md-card-header>
-                                                <!--<md-card-content>Good product within 7000</md-card-content>-->
-                                                <md-card-actions layout="row" layout-align="space-between center">
-                                                    <span layout="row" layout-align="start center">
-                          <ng-md-icon icon="person" size="15"></ng-md-icon>&nbsp;{{review.reviewer}}&nbsp;
-                          <ng-md-icon icon="access_time" size="15"></ng-md-icon>&nbsp;{{review.created | amCalendar}}
-                      </span>
-                                                    <md-button ng-if="single.myReview(review)" class="md-icon-button" ng-click="single.deleteReview(review)" aria-label="Delete Review">
-                                                        <ng-md-icon icon="delete" style="fill: #aaa"></ng-md-icon>&nbsp;
-                                                    </md-button>
-                                                </md-card-actions>
-                                            </md-card>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <h3 class="col-md-2">Learn</h3> <img style="width:150px;height:100px" src="assets/img/learn.png" class="responsive-img col-md-4">
-                                        </div>
-                                        <div ng-if="single.magazines">
-                                            <div ng-include="'components/messages/magazines.html'"></div>
-                                        </div>
-                                        <div ng-if="single.airline">
-                                            <div ng-include="'components/messages/airline.html'"></div>
-                                        </div>
-                                        <div ng-if="single.emailMarketing">
-                                            <div ng-include="'components/messages/email.html'"></div>
-                                        </div>
-                                        <div ng-if="single.cinema">
-                                            <div ng-include="'components/messages/cinema.html'"></div>
-                                        </div>
-                                        <div ng-if="single.newspapers">
-                                            <div ng-include="'components/messages/newspapers.html'"></div>
-                                        </div>
-                                        <div ng-if="single.radio">
-                                            <div ng-include="'components/messages/radio.html'"></div>
-                                        </div>
-                                        <div ng-if="single.television">
-                                            <div ng-include="'components/messages/tv.html'"></div>
-                                        </div>
-                                        <div ng-if="single.default">
-                                            <div ng-include="'components/messages/nontraditional.html'"></div>
-                                        </div>
-                                        <div ng-if="single.billboards">
-                                            <div ng-include="'components/messages/outdoor.html'"></div>
-                                        </div>
-                                        <div ng-if="single.banner">
-                                            <div ng-include="'components/messages/nontraditional.html'"></div>
-                                        </div>
-                                        <div ng-if="single.socialMedia">
-                                            <div ng-include="'components/messages/nontraditional.html'"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                         
                         </div>
                     </div>
             </section>
         </md-content>
         </div>
     </div>
+       <!--div-->
+                            <section style="position: relative;" class="container">
+                                <!--begin tabs -->
+                                <div ng-cloak>
+                                    <md-content>
+                                        <md-tabs md-dynamic-height md-border-bottom md-border-top>
+                                            <md-tab label="Adspace Messages">
+                                                <md-content class="md-padding">
+                                                    <p>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <!-- tabs -->
+                                                                <div class="tabbable tabs-left">
+                                                                    <ul class="nav nav-tabs">
+                                                                        <li class="active"><a href="#recommendations" data-toggle="tab">Recommendations</a></li>
+                                                                        <li><a href="#perfomancehistory" data-toggle="tab">Perfomance History</a></li>
+                                                                        <!--  <li><a href="#services" data-toggle="tab">Services</a></li>
+                                    <li><a href="#contact" data-toggle="tab">Contact</a></li> -->
+                                                                    </ul>
+                                                                    <div class="tab-content">
+                                                                        <div class="tab-pane active" id="recommendations">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Recommendations</div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="md-table-container">                                                                                    
+                                                                                        <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                        
+                                                                                        <tbody>
+                                                                                            <tr class="md-table-content-row" ng-repeat="f in single.product.recommendations track by $index">
+                                                                                                <td class="md-table-header">{{$index+1}}  </td>
+                                                                                                <td class="md-table-header">{{f.val}}</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="perfomancehistory">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Perfomance History</div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="md-table-container">                                                                                    
+                                                                                        <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                        
+                                                                                        <tbody>
+                                                                                            <tr class="md-table-content-row" ng-repeat="f in single.product.perfomanceHistory track by $index">
+                                                                                                <td class="md-table-header">{{$index+1}}  </td>
+                                                                                                <td class="md-table-header">{{f.val}}</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="services">
+                                                                            <div class="">
+                                                                                <h1>Services Tab</h1>
+                                                                                <p>meant to identify articles which deserve editor attention because they are the most important for an encyclopedia to have, as determined by the community of participating editors. They may also be of interest to readers as an alternative to lists of overview articles.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tab-pane" id="contact">
+                                                                            <div class="">
+                                                                                <h1>Contact Tab</h1>
+                                                                                <p>deserve editor attention because they are the most important for an encyclopedia to have, as determined by the community of participating editors. They may also be of interest to readers as an alternative to lists of overview articles.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /tabs -->
+                                                            </div>
+                                                        </div>
+                                                    </p>
+                                                </md-content>
+                                            </md-tab>
+                                            <md-tab label="About {{single.product.name}}">
+                                                <md-content class="md-padding">
+                                                    <p>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <!-- tabs -->
+                                                                <div class="tabbable tabs-left">
+                                                                    <ul class="nav nav-tabs">
+                                                                        <li class="active"><a href="#about" data-toggle="tab">About</a></li>
+                                                                        <li><a href="#pastadvertisers" data-toggle="tab">Past Advertisers</a></li>
+                                                                      
+                                                                        <li><a href="#calendar" data-toggle="tab">Production Calendar</a></li>
+                                                                          <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
+                                                                    </ul>
+                                                                    <div class="tab-content">
+                                                                        <div class="tab-pane " id="pastadvertisers">
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Past Advertisers</div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="md-table-container">                                                                                        
+                                                                                        <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                        
+                                                                                        <tbody>
+                                                                                            <tr class="md-table-content-row" ng-repeat="f in single.product.pastAdvertisers track by $index">
+                                                                                                <td class="md-table-header">{{$index+1}}  </td>
+                                                                                                <td class="md-table-header">{{f.val}}</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+
+                                                                           
+                                                                        </div>
+                                                                        <div class="tab-pane active" id="about">
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">About {{single.product.name}}</div>
+                                                                                        <div class="panel-body">
+                                                                                          <p>{{single.product.info}}</p>                                          
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-2">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="reviews">
+
+                                                                             <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Reviews</div>
+                                                                                        <div class="panel-body">
+                                                                                             <div class="">
+                                                                                <p>
+                                                                                    <div layout-align="center center" ng-if="single.reviews.length<1">
+                                                                                        <md-button ng-click="single.reviewForm()" class="md-raised md-primary">Be the first to review this publisher</md-button>
+                                                                                    </div>
+                                                                                    <div class="reviews" ng-if="single.reviews.length>0 ">
+                                                                                        <!--<h3>Reviews</h3>-->
+                                                                                        <div class="reviews-header" layout="column">
+                                                                                            <div flex layout="row" layout-align="center center">
+                                                                                                <md-button ng-click="single.reviewForm()" class="md-primary md-raised">Rate & Review</md-button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <md-card ng-repeat="review in single.reviews | orderBy: '-created'">
+                                                                                            <md-card-header>
+                                                                                                <md-card-avatar>
+                                                                                                    <list-image string="{{review.message || review.rating}}"></list-image>
+                                                                                                </md-card-avatar>
+                                                                                                <md-card-header-text>
+                                                                                                    <span class="md-subhead" ng-if="review.rating">
+                              <div class="rating-button">{{review.rating}} <ng-md-icon icon="star" size="15"></ng-md-icon></div>
+                          </span>
+                                                                                                    <span class="md-title" style="white-space: pre;margin-left: 10px;">{{review.message}}</span>
+                                                                                                </md-card-header-text>
+                                                                                            </md-card-header>
+                                                                                            <!--<md-card-content>Good product within 7000</md-card-content>-->
+                                                                                            <md-card-actions layout="row" layout-align="space-between center">
+                                                                                                <span layout="row" layout-align="start center">
+                          <ng-md-icon icon="person" size="15"></ng-md-icon>&nbsp;{{review.reviewer}}&nbsp;
+                          <ng-md-icon icon="access_time" size="15"></ng-md-icon>&nbsp;{{review.created | amCalendar}}
+                      </span>
+                                                                                                <md-button ng-if="single.myReview(review)" class="md-icon-button" ng-click="single.deleteReview(review)" aria-label="Delete Review">
+                                                                                                    <ng-md-icon icon="delete" style="fill: #aaa"></ng-md-icon>&nbsp;
+                                                                                                </md-button>
+                                                                                            </md-card-actions>
+                                                                                        </md-card>
+                                                                                    </div>
+                                                                                </p>
+                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="calendar">
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">{{single.product.name}} Production Calendar</div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="md-table-container">                                                                                        
+                                                                                        <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                         <thead>
+                                                                                            <tr class="md-table-headers-row">
+                                                                                                <th class="md-table-header">&nbsp;</th>
+                                                                                                <th class="md-table-header">Issue</th>
+                                                                                                <th class="md-table-header">Booking Deadline</th>
+                                                                                                 <th class="md-table-header">Material Deadline</th>
+                                                                                                <th class="md-table-header">Onshelf</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr class="md-table-content-row" ng-repeat="f in single.product.productionCalendar track by $index">
+                                                                                                <td class="md-table-header">{{$index+1}}  </td>
+                                                                                                <td class="md-table-header">{{f.Issue}}</td>
+                                                                                                <td class="md-table-header">{{f.BookingDeadLine}}</td>
+                                                                                                <td class="md-table-header">{{f.MaterialDealine}}</td>
+                                                                                                <td class="md-table-header">{{f.OnShelf}}</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /tabs -->
+                                                            </div>
+                                                        </div>
+                                                    </p>
+                                                </md-content>
+                                            </md-tab>
+                                            <md-tab label="Numbers">
+                                                <md-content class="md-padding">
+                                                    <p>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <!-- tabs -->
+                                                                <div class="tabbable tabs-left">
+                                                                    <ul class="nav nav-tabs">
+                                                                        <!-- <li ><a href="#facts" data-toggle="tab">Facts </a></li> -->
+                                                                        <!-- <li><a href="#estimates" data-toggle="tab">Estimated Monthly Views and clicks</a></li> -->
+                                                                        <li class="active"><a href="#gender" data-toggle="tab">Demographics-Gender</a></li>
+                                                                        <li><a href="#age" data-toggle="tab">Demographics-Age</a></li>
+                                                                        <li><a href="#income" data-toggle="tab">Demographics-Income Level</a></li>
+                                                                        <li><a href="#region" data-toggle="tab">Demographics-Region</a></li>
+                                                                        <li><a href="#audience" data-toggle="tab">Target Audience</a></li>
+                                                                    </ul>
+                                                                    <div class="tab-content">
+                                                                        <div class="tab-pane " id="facts">
+                                                                            <div class="">
+                                                                                <h1>facts</h1>
+                                                                                <!-- bullets -->
+                                                                                <p>These lists are meant to identify articles which deserve editor attention because they are the most important for an encyclopedia to have, as determined by the community of participating editors. They may also be of interest to readers as an alternative to lists of overview articles.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tab-pane" id="estimates">
+                                                                            <div class="">
+                                                                                <h1>About Tab</h1>
+                                                                                <p>because they are the most important for an encyclopedia to have, as determined by the community of participating editors. They may also be of interest to readers as an alternative to lists of overview articles.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tab-pane active" id="gender">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Gender</div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="md-table-container">                                                                                        
+                                                                                        <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                        <thead>
+                                                                                            <tr class="md-table-headers-row">
+                                                                                                <th class="md-table-header">Gender</th>
+                                                                                                <th class="md-table-header">Share (%)</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr class="md-table-content-row" ng-repeat="item in single.product.demographics | filter:'Gender':item.key">
+                                                                                                <td class="md-table-header">{{item.val}} </td>
+                                                                                                <td class="md-table-header">{{item.val2}}</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading"> Split</div>
+                                                                                        <div class="panel-body">                                              
+                                                                                             <canvas width="688" height="343" id="doughnut" class="chart chart-doughnut" chart-data="single.genderData" chart-labels="single.genderLabels">
+                                                                                </canvas>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="age">
+                                                                             <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Age</div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="md-table-container">                                                                                        
+                                                                                       <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                        <thead>
+                                                                                            <tr class="md-table-headers-row">
+                                                                                                <th class="md-table-header">Age Group</th>
+                                                                                                <th class="md-table-header">Share (%)</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr class="md-table-content-row" ng-repeat="item in single.product.demographics | filter:'Age':item.key">
+                                                                                                <td class="md-table-header">{{item.val}} </td>
+                                                                                                <td class="md-table-header">{{item.val2}}</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Split</div>
+                                                                                        <div class="panel-body">                                          
+
+                                                                                            <canvas id="doughnut"  width="688" height="343" class="chart chart-doughnut" chart-data="single.ageData" chart-labels="single.ageLabels">
+                                                                                           </canvas>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="income">
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Income Level</div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="md-table-container">                                                                                        
+                                                                                        <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                        <thead>
+                                                                                            <tr class="md-table-headers-row">
+                                                                                                <th class="md-table-header">Income Level</th>
+                                                                                                <th class="md-table-header">Share (%)</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr class="md-table-content-row" ng-repeat="item in single.product.demographics | filter:'Income':item.key">
+                                                                                                <td class="md-table-header">{{item.val}} </td>
+                                                                                                <td class="md-table-header">{{item.val2}}</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Split</div>
+                                                                                        <div class="panel-body">                                                                                           
+                                                                                            <canvas width="688" height="343" id="doughnut" class="chart chart-doughnut" chart-data="single.incomeData" chart-labels="single.incomeLabels">
+                                                                                            </canvas>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="region">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Region</div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="md-table-container">                                                                                        
+                                                                                        <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                            <thead>
+                                                                                                <tr class="md-table-headers-row">
+                                                                                                    <th class="md-table-header">Region</th>
+                                                                                                    <th class="md-table-header">Share (%)</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <tr class="md-table-content-row" ng-repeat="item in single.product.demographics | filter:'Country':item.key">
+                                                                                                    <td class="md-table-header">{{item.val}} </td>
+                                                                                                    <td class="md-table-header">{{item.val2}}</td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Split</div>
+                                                                                        <div class="panel-body">
+                                                                                             <canvas  width="688" height="343" id="doughnut" class="chart chart-doughnut"
+                                                                                              chart-data="single.countryData" chart-labels="single.countryLabels">
+                                                                                            </canvas>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tab-pane" id="audience">
+
+                                                                              <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Audience Profle</div>
+                                                                                        <div class="panel-body">
+                                                                                             <div class="md-table-container">                                                                                        
+                                                                                        <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                           
+                                                                                            <tbody>
+                                                                                                <tr class="md-table-content-row" ng-repeat="f in single.product.targetAudience track by $index">
+                                                                                                    <td class="md-table-header">{{$index+1}} </td>
+                                                                                                    <td class="md-table-header">{{f.val}}</td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                           
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+
+                                                                            
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /tabs -->
+                                                            </div>
+                                                        </div>
+                                                    </p>
+                                                </md-content>
+                                            </md-tab>
+                                            <md-tab label="Execution Process">
+                                                <md-content class="md-padding">
+                                                    <p>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <!-- tabs -->
+                                                                <div class="tabbable tabs-left">
+                                                                    <ul class="nav nav-tabs">
+                                                                        <li class="active"><a href="#process" data-toggle="tab">Execution Process</a></li>
+                                                                        <li><a href="#publishing" data-toggle="tab">Confirmaton</a></li>
+                                                                        <li><a href="#help" data-toggle="tab">How Adspaces can help you ?</a></li>
+                                                                        <li><a href="#creative" data-toggle="tab">Creative</a></li>
+                                                                    </ul>
+                                                                    <div class="tab-content">
+                                                                        <div class="tab-pane active" id="process">
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Execution Process</div>
+                                                                                        <div class="panel-body">
+                                                                                            <ul>
+                                                                                                <li ng-repeat="f in single.product.steps track by $index">
+                                                                                                    <h3>Step {{$index+1}}</h3>
+                                                                                                    <br>
+                                                                                                    <p>{{f.val}}
+                                                                                                        <p>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="publishing">
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">How do i know my advert was published</div>
+                                                                                        <div class="panel-body">
+                                                                                            <p>{{single.product.confirmation}}</p>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="help">
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">How Adspaces Can Help You</div>
+                                                                                        <div class="panel-body">
+                                                                                            <p>{{single.product.whyadspaces}}</p>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="creative">
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Guideline to Advert Creation</div>
+                                                                                        <div class="panel-body">
+                                                                                            <div class="md-table-container">                                                                                    
+                                                                                        <table md-colresize="md-colresize" class="md-table" id="exportable">
+                                                                                        
+                                                                                        <tbody>
+                                                                                            <tr class="md-table-content-row" ng-repeat="f in single.product.guidelines track by $index">
+                                                                                                <td class="md-table-header">{{$index+1}}  </td>
+                                                                                                <td class="md-table-header">{{f.val}}</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /tabs -->
+                                                            </div>
+                                                        </div>
+                                                        </p>
+                                                </md-content>
+                                            </md-tab>
+                                            <md-tab label="Other Information">
+                                                <md-content class="md-padding">
+                                                    <p>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <!-- tabs -->
+                                                                <div class="tabbable tabs-left">
+                                                                    <ul class="nav nav-tabs">
+                                                                        <!-- <li class="active"><a href="#guideline" data-toggle="tab">Guidelines for Advert Creation</a></li> -->
+                                                                        <li class="active"> <a href="#why" data-toggle="tab">Advantages of advertising in {{single.product.name}}</a></li>
+                                                                        <li><a href="#whyadspaces" data-toggle="tab">Why advertise through Adspaces</a></li>
+                                                                        <li><a href="#Learn" data-toggle="tab">Learn </a></li>
+                                                                    </ul>
+                                                                    <div class="tab-content">
+                                                                        <div class="tab-pane " id="guideline">
+                                                                            <div class="">
+                                                                                <h1>guideline</h1>
+                                                                                <p>These lists are meant to identify articles which deserve editor attention because they are the most important for an encyclopedia to have, as determined by the community of participating editors. They may also be of interest to readers as an alternative to lists of overview articles.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tab-pane active" id="why">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Advantages of advertising in {{single.product.name}}</div>
+                                                                                        <div class="panel-body">
+                                                                                            
+                                                                                            <p>{{single.product.description}}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div>                                                                            
+                                                                            
+                                                                        </div>
+                                                                        <div class="tab-pane" id="whyadspaces">
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Why use Adspaces</div>
+                                                                                        <div class="panel-body">                                                                                            
+                                                                                            <p>{{single.product.whyadspaces}}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                  
+                                                                                </div>
+                                                                            </div> 
+                                                                           
+                                                                        </div>
+                                                                        <div class="tab-pane" id="Learn">
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="panel panel-default">
+                                                                                        <div class="panel-heading">Learn</div>
+                                                                                        <div class="panel-body">                                                           <div class="">
+                                                                                <div class="row">
+                                                                                    <h5 class="col-md-2">Learn</h5> <img style="width:70px;height:50px" src="assets/img/learn.png" class="responsive-img col-md-4">
+                                                                                </div>
+                                                                                <div ng-if="single.magazines">
+                                                                                    <div ng-include="'components/messages/magazines.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.airline">
+                                                                                    <div ng-include="'components/messages/airline.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.emailMarketing">
+                                                                                    <div ng-include="'components/messages/email.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.cinema">
+                                                                                    <div ng-include="'components/messages/cinema.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.newspapers">
+                                                                                    <div ng-include="'components/messages/newspapers.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.radio">
+                                                                                    <div ng-include="'components/messages/radio.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.television">
+                                                                                    <div ng-include="'components/messages/tv.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.default">
+                                                                                    <div ng-include="'components/messages/nontraditional.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.billboards">
+                                                                                    <div ng-include="'components/messages/outdoor.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.banner">
+                                                                                    <div ng-include="'components/messages/nontraditional.html'"></div>
+                                                                                </div>
+                                                                                <div ng-if="single.socialMedia">
+                                                                                    <div ng-include="'components/messages/nontraditional.html'"></div>
+                                                                                </div>
+                                                                            </div>                                 
+                                                                                           
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-md-2">
+                                                                                  
+                                                                                </div>
+                                                                            </div> 
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /tabs -->
+                                                            </div>
+                                                        </div>
+                                                    </p>
+                                                </md-content>
+                                            </md-tab>
+                                        </md-tabs>
+                                    </md-content>
+                                </div>
+                                <!--end tabs -->
+                            </section>
     <footer></footer>
     <script>
     $("#adspace").click(function() {
