@@ -118,7 +118,9 @@ function create(req, res) {
    req.files.file.path = req.files.file.path.replace("client\\", "").replace('client/', '').replace('client//', ''); 
   
    var str = req.files.file.path;
-   var arr = str.split("/");
+   var arr = str.split("\\");
+   console.log(str);
+   console.log(arr);
    var tempPath = arr[4];
    var fullPath = "https://s3.amazonaws.com/mediabox-adverts//resources/"+tempPath;  
     req.files.file.path = fullPath;

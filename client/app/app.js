@@ -8270,10 +8270,10 @@ angular.module('mediaboxApp').config(function ($stateProvider) {
     },
     handlingFee: 5,
     currency: {
-      code: 'RAND', // Paypal currency code *** Please choose from https://developer.paypal.com/docs/classic/api/currency_codes/
-      shop_currency: 'RAND',
-      symbol: 'R', // Currency symbol to be displayed through out the shop
-      exchange_rate: '12' // Paypal currency code(USD) / Shop currency (INR) ***  exchange_rate should not be 0 else it will generate divided by 0 error
+      code: 'USD', // Paypal currency code *** Please choose from https://developer.paypal.com/docs/classic/api/currency_codes/
+      shop_currency: 'USD',
+      symbol: '$', // Currency symbol to be displayed through out the shop
+      exchange_rate: '1' // Paypal currency code(USD) / Shop currency (INR) ***  exchange_rate should not be 0 else it will generate divided by 0 error
     },
     paymentStatus: ['Pending', 'Paid', 'created'], // On success from Paypal it stores as created
     orderStatus: ['Payment Pending', 'Order Placed', 'Order Accepted', 'Order Executed', 'Shipped', 'Delivered', 'Cancelled', 'Not in Stock'],

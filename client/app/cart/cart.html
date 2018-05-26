@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div id="totalContainer" class="col-xs-3 stats-graph">
-                        <h4 class="section-header">Total Spend</h4> {{vm.cart.getTotalPrice() | currency:"R"}} - ({{vm.cart.getTotalCount()}} items)
+                        <h4 class="section-header">Total Spend</h4> {{vm.cart.getTotalPrice() | currency:"$"}} - ({{vm.cart.getTotalCount()}} items)
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                                     &nbsp;&nbsp;&nbsp;<span ng-show="cart.loaded[$index]=='notavailable'" class="green">10</span>
                                     <span ng-show="cart.loaded[$index]=='available'" class="green">{{cart.available[$index]}}</span>
                                 </td>
-                                <td>{{item.price | currency:"R"}}</td>
+                                <td>{{item.price | currency:"$"}}</td>
                                 <td>
                                     <md-button class="md-raised md-primary small-button md-icon-button" ng-click="vm.cart.addItem({sku:item.sku, name:item.name, slug:item.slug, mrp:item.mrp, price:item.price, weight:item.weight, vid:item.vid}, +1)" aria-label="Add to cart">
                                         <ng-md-icon icon="add"></ng-md-icon>
@@ -108,7 +108,7 @@
                                         <ng-md-icon icon="remove"></ng-md-icon>
                                     </md-button>
                                 </td>
-                                <td><span><strong>{{item.price * item.quantity | currency:"R"}}</strong></span></td>
+                                <td><span><strong>{{item.price * item.quantity | currency:"$"}}</strong></span></td>
                                 <td class="product-actions">
                                     <a aria-label="Remove {{item.name}} from cart" ng-click="vm.cart.addItem({sku:item.sku, vid: item.vid}, -10000000);">
                                         <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
