@@ -6134,6 +6134,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             vm.countryLabels  = [];
             vm.countryData    = [];
+
+            vm.distributionData = [];
+            vm.distributionLabels = [];
             ////console.log($stateParams);
             //
             if (id == null) {
@@ -6151,6 +6154,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                       for (var i = 0; i < vm.product.demographics.length; i++) {
                       vm.product.demographics[i];
+                      console.log(vm.product.demographics[i]);
                      
                       if (vm.product.demographics[i].key=="Gender") {
                           vm.genderLabels.push(vm.product.demographics[i].val);
@@ -6168,9 +6172,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                           vm.countryLabels.push(vm.product.demographics[i].val);
                           vm.countryData.push(vm.product.demographics[i].val2);
                       }
+
+                      if (vm.product.demographics[i].key=="Distribution Channel") {
+                        vm.distributionLabels.push(vm.product.demographics[i].val);
+                        vm.distributionData.push(vm.product.demographics[i].val2);
+                      }
                     }
 
-                     console.log(vm.genderLabels,vm.genderData);
+                     console.log(vm.distributionLabels,vm.distributionData);
                 });
             } else {
 
@@ -6188,6 +6197,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                     for (var i = 0; i < vm.product.demographics.length; i++) {
                       vm.product.demographics[i];
+                      console.log(vm.product.demographics[i]);
                      
                       if (vm.product.demographics[i].key=="Gender") {
                           vm.genderLabels.push(vm.product.demographics[i].val);
@@ -6205,9 +6215,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                           vm.countryLabels.push(vm.product.demographics[i].val);
                           vm.countryData.push(vm.product.demographics[i].val2);
                       }
+                      if (vm.product.demographics[i].key=="Distribution Channel") {
+                        vm.distributionLabels.push(vm.product.demographics[i].val);
+                        vm.distributionData.push(vm.product.demographics[i].val2);
+                      }
                     }
 
-                     console.log(vm.genderLabels,vm.genderData);
+                     console.log(vm.distributionLabels,vm.distributionData);
 
                     vm.learn(res);
 
