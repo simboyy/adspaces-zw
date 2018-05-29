@@ -3,7 +3,7 @@
         <form>
 
         <div layout-align="space-between top" class="md-whiteframe-z1" layout-padding>
-            <md-card >
+            <md-card  data-step="3" data-intro="Filter publishers by price to suit your budget!">
                 <h4>Price Range</h4>
             <md-content>
                 <rzslider 
@@ -15,7 +15,7 @@
             </md-content>
             </md-card>
             
-            <md-card style="height: 500px;" ng-if="main.brands">
+            <md-card data-step="4" data-intro="Target by industry to reach specific audience!" style="height: 500px;" ng-if="main.brands">
                 <md-input-container>
                     <input ng-model="filterBrands" placeholder="Categories"/>
                 </md-input-container>

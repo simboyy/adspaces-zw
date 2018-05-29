@@ -48,7 +48,7 @@
                                     </div>
                                     <md-button ng-click="single.reviewForm()" class="md-raised md-primary">Review this publisher</md-button>
                                 </div>
-                                <div class="col-sm-9">
+                                <div data-step="3" data-intro="Publisher`s brief introduction and figures!" class="col-sm-9">
                                     <div class="box" style="margin-right: 20px">
                                         <h3 class="text-center">Advertising in {{single.product.name}} </h3>
                                         <div ng-if="single.product.info">
@@ -113,7 +113,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="box" id="div" style="margin-right: 20px">
+                            <div data-step="4" data-intro="Publisher`s rate card !" class="box" id="div" style="margin-right: 20px">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <summary ng-if="single.name"><small>{{single.name}} &nbsp; {{single.formart}} &nbsp;{{single.size}}</small></summary>
@@ -162,7 +162,7 @@
                                                             <br><small>{{adspace.model}}</small></td>
                                                         <td class="md-table-header"><small> 
                                                           <div layout="row" layout-align="start center">
-                                                          <cart-buttons variant="adspace" product="single.product"></cart-buttons>
+                                                          <cart-buttons  data-step="6" data-intro="Select to buy ad space and get 5 % discount!" variant="adspace" product="single.product"></cart-buttons>
                                                           
                                                       </div>
                                                  
@@ -183,7 +183,7 @@
         </div>
     </div>
        <!--div-->
-                            <section style="position: relative;" class="container">
+                            <section data-step="5" data-intro="View more information ,stats and figures about publisher!" style="position: relative;" class="container">
                                 <!--begin tabs -->
                                 <div ng-cloak>
                                     <md-content>
