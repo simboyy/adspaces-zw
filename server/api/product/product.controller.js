@@ -38,6 +38,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var async = require("async");
 
+
+   var BUCKET_NAME = 'mediabox-adverts';
+
+
+
+   var aws = require('aws-sdk');
+   aws.config.update({accessKeyId: '', secretAccessKey: ''});
+   aws.config.update({region: 'us-east-1'});
+
+   var s3 = new aws.S3();
+
 function isJson(str) {
   try {
     str = JSON.parse(str);
@@ -174,6 +185,28 @@ exports.priceRange = function (req, res) {
 
 // Gets a list of Products
 function index(req, res) {
+
+    
+
+  // _product2.default.find({}).limit(20).skip(40).sort({created_at: -1}).exec(function (err, products) {
+  //   products.forEach(function (doc) { 
+  //      console.log("deleting data");
+  //     _product2.default.update({},{$unset: {'logo':true}},{multi: true});
+
+    //   db.amazon_rev.update({
+    //     "meta.asin": {$exists: true}
+    //  },{
+    //     $unset: {
+    //        "meta.$.asin" : true
+    //     }
+    //  },false,true);
+ 
+         //console.log(doc.variants);
+    //    });
+
+    //  });
+
+
   if (req.query) {
 
     var q = isJson(req.query.where);
@@ -182,16 +215,24 @@ function index(req, res) {
     req.query.skip = parseInt(req.query.skip);
     req.query.limit = parseInt(req.query.limit);
     var select = isJson(req.query.select);
+    console.log(select);
 
     var p = [];
     _product2.default.find(q).limit(req.query.limit).skip(req.query.skip).sort(sort).sort({description: -1}).select(select).exec(function (err, products) {
       if (err) {
         return handleError(res, err);
       }
+      
       return res.status(200).json(products);
     });
   } else {
-    return _product2.default.find({}, null, {sort: {created_at: -1}}).exec().then(respondWithResult(res)).catch(handleError(res));
+   return _product2.default.find({}, null, {sort: {created_at: -1}}).exec().then(respondWithResult(res)).catch(handleError(res));
+
+  
+     
+
+
+
   }
 }
 

@@ -5,7 +5,7 @@
   <md-content class="cart-content">
     <form>
       <div layout="row" layout-align="space-between start" ng-repeat="item in vm.cart.items" class="cart-item md-whiteframe-z1">
-            <img  class="md-whiteframe-z1" width="80px" height="100%" data-ng-src="data:image/png;base64,{{item.image}}" err-SRC="/assets/images/50x50.png"  alt="{{item.name}}" />
+            <img  class="md-whiteframe-z1" width="80px" height="100%" data-ng-src="{{item.image}}" err-SRC="/assets/images/50x50.png"  alt="{{item.name}}" />
             <div layout="column" flex style="margin: 7px">
                 <div >{{ item.name }} <span ng-if="item.size">(Size: {{item.size}})</span></div>                
                 <div layout="row" layout-align="center center">

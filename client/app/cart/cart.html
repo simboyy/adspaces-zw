@@ -64,7 +64,7 @@
                                 <td>{{$index+1}}</td>
                                 <td class="product-thumbnail">
                                     <a>
-                                        <img data-ng-src="data:image/png;base64,{{item.image}}" alt="{{item.publisher}}" style="width: 100px;">
+                                        <img data-ng-src="{{item.image}}" alt="{{item.publisher}}" style="width: 100px;">
                                     </a><br>&nbsp;
                                     <br> {{item.publisher}}
                                 </td>
@@ -74,11 +74,27 @@
                                         <img style="width: 100px;border: none;" ng-src="{{item.creative}}" err-SRC="/assets/images/material-shop.jpg">
                                     </md-input-container>
                                     <div ng-hide="item.creative">
-                                        <button class="btn btn-danger" ng-hide="isAdmin()" ng-click="cart.mediaLibrary($index)"><i class="fa fa-image"></i><span class="glyphicon glyphicon-upload"></span></button>
+                                        <button class="btn btn-danger" ng-hide="isAdmin()" ng-click="cart.mediaLibrary($index)"><i class="fa fa-image">Upload Artwork</i><span class="glyphicon glyphicon-upload"></span></button>
                                     </div>
                                     <div ng-show="item.creative">
-                                        <button class="btn btn-success" ng-hide="isAdmin()" ng-click="cart.mediaLibrary($index)"><i class="fa fa-image"></i><span class="glyphicon glyphicon-upload"></span></button>
+                                        <button class="btn btn-success" ng-hide="isAdmin()" ng-click="cart.mediaLibrary($index)"><i class="fa fa-image">Upload Artwork</i><span class="glyphicon glyphicon-upload"></span></button>
                                     </div>
+
+                                    <div >
+                                        &nbsp;<br>
+                                     <div class="form-group has-feedback">
+                                         <label style="color: #333">Alt Text</label>
+                                         <input type="text"  style="height:30px" class="form-control" id="config-demo" name="alttext" value="" ng-model="item.AltText" placeholder="Your company name" />
+                                       
+                                     </div>
+                                     <div class="form-group has-feedback">
+                                             <label style="color: #333" >Destination Url</label>
+                                             <input type="url"  style="height:30px" class="form-control" id="config-demo" name="alttext" value="" ng-model="item.DestinationUrl" placeholder="Your website address" />
+                                           
+                                         </div>
+                                 </div>
+
+
                                 </td>
                                 <td class="product-name">
                                     <div class="col-md-12 demo">

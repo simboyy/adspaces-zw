@@ -20,7 +20,12 @@ var ProductSchema = new _mongoose2.default.Schema({
   phone: String,
   email: String,
   slug: String,
-  logo: Array, 
+  link: String,
+  logo: {
+    type: Array,
+    required: false,
+    select: false,
+  },
   website: String,
   terms: String,
   category: { type: _mongoose.Schema.Types.ObjectId, ref: 'Category' },

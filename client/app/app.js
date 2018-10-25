@@ -1004,7 +1004,10 @@ angular.module('mediaboxApp').controller('LeftCtrl', function ($scope, $timeout,
       //{ field: "campaignNo", title:"Campaign #", width: "70px" },
       //{ field: "publisher", title:"Publisher", width: "100px" },
       // { field: "category", title:"Category", width: "50px" },
-      { field: "name", title: "Name", width: "80px" }, { field: "category", title: "Start - End Date", width: "60px" }, { field: "price", title: "Price", width: "50px", format: "{0:c2}" }, { field: "quantity", title: "Inserts", width: "30px" },
+      { field: "name", title: "Name", width: "80px" },
+       { field: "category", title: "Start - End Date", width: "60px" }, 
+       { field: "price", title: "Price - $", width: "50px", format: "{0:c2}" },
+        { field: "quantity", title: "Inserts", width: "30px" },
       //    { 
 
       //    title: "Status",
@@ -1497,7 +1500,9 @@ angular.module('mediaboxApp').controller('CampaignCompletedController', function
       //{ field: "campaignNo", title: "Campaign #", width: "70px" },
       //{ field: "publisher", title:"Publisher", width: "100px" },
       // { field: "category", title:"Category", width: "50px" },
-      { field: "name", title: "Name", width: "100px" }, { field: "category", title: "Start - End Date", width: "60px" }, { field: "price", title: "Price", width: "50px", format: "{0:c2}" }, { field: "quantity", title: "Inserts", width: "30px" },
+      { field: "name", title: "Name", width: "100px" }, 
+      { field: "category", title: "Start - End Date", width: "60px" },
+       { field: "price", title: "Price- $", width: "50px", format: "{0:c2}" }, { field: "quantity", title: "Inserts", width: "30px" },
       //    { 
 
       //    title: "Status",
@@ -4625,12 +4630,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                 for (var i = 0; i < cart.items.length; i++) {
 
-                    mytable += "<tr><td class=\"col-sm-4\" style=\"text-align:left\">" + cart.items[i].publisher + "</td>" + "<td class=\"col-sm-6\" style=\"text-align:left\">" + cart.items[i].name + "</td>" +
+                  if(cart.items[i].mrp=="CPM"){
+                    mytable += "<tr><td class=\"col-sm-4\" style=\"text-align:left\">"+(i+1) +". "+ cart.items[i].publisher + "</td>" + "<td class=\"col-sm-6\" style=\"text-align:left\">" + cart.items[i].name + "   @ "+vm.Settings.currency.symbol+cart.items[i].price+" /"+cart.items[i].mrp+"</td>" +
                     // "<td class=\"col-sm-3\" style=\"text-align:left\">"+cart.items[i].category+"</td>"+
-                    "<td class=\"col-sm-1\" style=\"text-align:left\">" + vm.Settings.currency.symbol + parseFloat(cart.items[i].price) + "</td>" + "<td class=\"col-sm-1\" style=\"text-align:left\">" + cart.items[i].quantity + "</td>" + "</tr>";
+                    "<td class=\"col-sm-1\" style=\"text-align:left\">"  + "</td>" + "<td class=\"col-sm-1\" style=\"text-align:left\">" + nformatter.format(cart.items[i].quantity) + "</td>" + "</tr>";
+                  }else{
+                    mytable += "<tr><td class=\"col-sm-4\" style=\"text-align:left\">"+(i+1) +". "+ cart.items[i].publisher + "</td>" + "<td class=\"col-sm-6\" style=\"text-align:left\">" + cart.items[i].name + "</td>" +
+                    // "<td class=\"col-sm-3\" style=\"text-align:left\">"+cart.items[i].category+"</td>"+
+                    "<td class=\"col-sm-1\" style=\"text-align:left\">" + vm.Settings.currency.symbol + parseFloat(cart.items[i].price).toFixed(2) + "</td>" + "<td class=\"col-sm-1\" style=\"text-align:left\">" + cart.items[i].quantity + "</td>" + "</tr>";
+                  }
+
+                   
                 }
 
-                mytable += "<tr>" + "<td class=\"col-sm-2\" style=\"text-align:left\">SubTotal</td>" + "<td class=\"col-sm-4\" style=\"text-align:left\">" + vm.Settings.currency.symbol + parseFloat(cart.getTotalPrice()) + "</td>" + "<td class=\"col-sm-4\" style=\"text-align:left\">&nbsp;</td>" + "<td class=\"col-sm-1\" style=\"text-align:left\">&nbsp;</td>" + "<td class=\"col-sm-1\" style=\"text-align:left\">&nbsp;</td></tr>";
+                mytable += "<tr>" + "<td class=\"col-sm-2\" style=\"text-align:left\">SubTotal</td>" + "<td class=\"col-sm-4\" style=\"text-align:left\">" + formatter.format(parseFloat(cart.getTotalPrice())) + "</td>" + "<td class=\"col-sm-4\" style=\"text-align:left\">&nbsp;</td>" + "<td class=\"col-sm-1\" style=\"text-align:left\">&nbsp;</td>" + "<td class=\"col-sm-1\" style=\"text-align:left\">&nbsp;</td></tr>";
 
                 mytable += "</tbody></table>";
 
@@ -9318,6 +9331,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.cart = Cart.cart;
         this.Auth = Auth;
         this.addItem = function (product, variant, i) {
+          
+         // console.log(product);
             var advertiser = this.Auth.getCurrentUser();
             i = i || 1;
 
@@ -9331,7 +9346,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                todo add category to cart
              */
 
-            this.cart.addItem({ sku: variant._id, name: variant.name, slug: variant.formart, mrp: variant.model, weight: variant.maxSize, size: variant.size, price: variant.price, status: { name: 'New', val: 402 }, publisher: product.name, publisheruid: product.uid, advertiser: this.Auth.getCurrentUser(), uid: product.uid, image: product.logo[0].base64, quantity: 1, vid: variant._id }, i);
+            this.cart.addItem({ sku: variant._id, name: variant.name, slug: variant.formart, mrp: variant.model, weight: variant.maxSize, size: variant.size, price: variant.price, status: { name: 'New', val: 402 }, publisher: product.name, publisheruid: product.uid, advertiser: this.Auth.getCurrentUser(), uid: product.uid, image: product.link, quantity: 1, vid: variant._id }, i);
         };
     };
 
@@ -9926,6 +9941,8 @@ ShoppingCart.prototype.saveItems = function () {
 
 // adds an item to the cart
 ShoppingCart.prototype.addItem = function (product, quantity) {
+
+   console.log(product);
 
     if (this.pflag) {
         quantity = this.toNumber(quantity);
