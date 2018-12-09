@@ -274,6 +274,33 @@ function update(req, res) {
 
   if (req.body.name) req.body.nameLower = req.body.name.toString().toLowerCase();
 
+
+  if(req.body.logo){
+ 
+    var base64 = req.body.logo.base64;  
+    var fileBuffer = new Buffer(base64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+    var metaData = base64.split(';')[0].split('/')[1];
+    var remoteFilename = req.body.slug+'.'+req.body.logo.filetype.split('/')[1];
+    //console.log(remoteFilename);
+    var link = 'https://s3.amazonaws.com/mediabox-adverts/'+remoteFilename;
+    console.log(link);
+    //console.log(req.body);
+    req.body.link = link;
+    s3.putObject({
+      ACL: 'public-read',
+      Bucket: BUCKET_NAME,
+      Key: remoteFilename,
+      Body: fileBuffer,
+      ContentType: metaData,
+      ContentEncoding: 'base64', // required
+      ContentType: `image/${metaData}`
+    }, function(error, response) {
+      console.log('uploaded file[' + remoteFilename + '] to [' + remoteFilename + '] as [' + metaData + ']');
+      console.log(response);
+    });
+  
+  }
+
   // Just to enable checking if the category has any product
   _category2.default.update({}, { $pull: { products: { _id: req.params.id } } }, { multi: true }, function removeConnectionsCB(err, obj) {
     if (req.body.category) {

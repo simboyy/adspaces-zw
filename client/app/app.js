@@ -96,7 +96,14 @@ angular.module('mediaboxApp').config(function ($stateProvider) {
     title: 'Change Password',
     authenticate: true
   });
-}).run(function ($rootScope, Auth) {
+}).run(function ($rootScope, Auth,$anchorScroll) {
+
+  $rootScope.$on("$locationChangeSuccess", function(){
+    console.log("changing state");
+    $anchorScroll();
+});  
+
+
   $rootScope.$on('$stateChangeStart', function (event, next, nextParams, current) {
     if (next.name === 'logout' && current && current.name && !current.authenticate) {
       next.referrer = current.name;
