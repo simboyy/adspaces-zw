@@ -1,6 +1,18 @@
 'use strict';
 
-angular.module('mediaboxApp', ['mediaboxApp.auth', 'mediaboxApp.admin', 'mediaboxApp.constants', 'ngCookies', 'ngResource', 'ngSanitize', 'ngMessages', 'btford.socket-io', 'ui.router', 'validation.match', 'ngMaterial', 'ngAnimate', 'ngMdIcons', 'angularMoment', 'infinite-scroll', 'materialDatePicker', 'ngFileUpload', 'rzModule', 'darthwade.dwLoading', 'ui.tree', 'ui.odometer', 'oitozero.ngSweetAlert', 'naif.base64', 'ngPintura', 'ngOnload', 'kendo.directives', 'mwl.calendar', 'ui.bootstrap','chart.js']).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $urlMatcherFactoryProvider, $mdThemingProvider, $mdIconProvider) {
+angular.module('mediaboxApp', ['mediaboxApp.auth', 'mediaboxApp.admin', 'mediaboxApp.constants', 'ngCookies', 'ngResource', 'ngSanitize', 'ngMessages', 'btford.socket-io', 'ui.router', 'validation.match', 'ngMaterial', 'ngAnimate', 'ngMdIcons', 'angularMoment', 'infinite-scroll', 'materialDatePicker', 'ngFileUpload', 'rzModule', 'darthwade.dwLoading', 'ui.tree', 'ui.odometer', 'oitozero.ngSweetAlert', 'naif.base64', 'ngPintura', 'ngOnload', 'kendo.directives', 'mwl.calendar', 'ui.bootstrap','chart.js','ngLocalize', 'ngLocalize.Config', 'ngLocalize.Events'])
+.value('localeConf', {
+  basePath: 'languages',
+  defaultLocale: 'en-US',
+  sharedDictionary: 'common',
+  fileExtension: '.lang.json',
+  persistSelection: true,
+  cookieName: 'COOKIE_LOCALE_LANG',
+  observableAttrs: new RegExp('^data-(?!ng-|i18n)'),
+  delimiter: '::',
+  validTokens: new RegExp('^[\\w\\.-]+\\.[\\w\\s\\.-]+\\w(:.*)?$')
+})
+.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $urlMatcherFactoryProvider, $mdThemingProvider, $mdIconProvider) {
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
 
@@ -25,7 +37,27 @@ angular.module('mediaboxApp', ['mediaboxApp.auth', 'mediaboxApp.admin', 'mediabo
   // $mdIconProvider.iconSet('social', spritePath + 'svg-sprite-social.svg');
   // $mdIconProvider.iconSet('avatar', '../assets/iconsets/avatar-icons.svg', 128);
   // $mdIconProvider.defaultIconSet(spritePath + 'svg-sprite-alert.svg');
-}).controller('preLoaderCtrl', function ($scope) {
+})
+.controller('LocaleControl', ['$scope', 'localeEvents',
+    function ($scope, localeEvents) {
+        $scope.$on(localeEvents.resourceUpdates, function (data) {
+          console.log('new language Chosen'+ data);
+            // Example data parameter for fr-FR common.lang.json bundle:
+            // {
+            //     locale: 'fr-FR',
+            //     path: 'common',
+            //     bundle: {
+            //         "yes": "Oui",
+            //         "no": "Aucun"
+            //     }
+            // }
+        });
+        $scope.$on(localeEvents.localeChanges, function (event, data) {
+            console.log('new locale chosen: ' + data);
+        });
+    }
+])
+.controller('preLoaderCtrl', function ($scope) {
   $scope.siteLoaded = true;
 });
 //# sourceMappingURL=app.js.map
@@ -54,7 +86,8 @@ angular.module('app.about', []).controller('AboutController', function () {});
 
 'use strict';
 
-angular.module('mediaboxApp').config(function ($stateProvider) {
+angular.module('mediaboxApp')
+.config(function ($stateProvider) {
   // login, signup are used for emergency situations otherwise LoginModal
   $stateProvider.state('login', {
     url: '/login?referrer',
@@ -96,7 +129,23 @@ angular.module('mediaboxApp').config(function ($stateProvider) {
     title: 'Change Password',
     authenticate: true
   });
-}).run(function ($rootScope, Auth,$anchorScroll) {
+}).run(function ($rootScope, Auth,$anchorScroll,localeEvents) {
+
+  $rootScope.$on(localeEvents.resourceUpdates, function (data) {
+    console.log('new language Chosen'+ data);
+      // Example data parameter for fr-FR common.lang.json bundle:
+      // {
+      //     locale: 'fr-FR',
+      //     path: 'common',
+      //     bundle: {
+      //         "yes": "Oui",
+      //         "no": "Aucun"
+      //     }
+      // }
+  });
+  $rootScope.$on(localeEvents.localeChanges, function (event, data) {
+      console.log('new locale chosen: ' + data);
+  });
 
   $rootScope.$on("$locationChangeSuccess", function(){
     console.log("changing state");

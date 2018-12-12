@@ -215,10 +215,10 @@ function index(req, res) {
     req.query.skip = parseInt(req.query.skip);
     req.query.limit = parseInt(req.query.limit);
     var select = isJson(req.query.select);
-    console.log(select);
+    //console.log(select);
 
     var p = [];
-    _product2.default.find(q).limit(req.query.limit).skip(req.query.skip).sort(sort).sort({description: -1}).select(select).exec(function (err, products) {
+    _product2.default.find(q).limit(req.query.limit).skip(req.query.skip).sort(sort).select(select).exec(function (err, products) {
       if (err) {
         return handleError(res, err);
       }
@@ -226,7 +226,7 @@ function index(req, res) {
       return res.status(200).json(products);
     });
   } else {
-   return _product2.default.find({}, null, {sort: {created_at: -1}}).exec().then(respondWithResult(res)).catch(handleError(res));
+   return _product2.default.find({}, null, null).exec().then(respondWithResult(res)).catch(handleError(res));
 
   
      
